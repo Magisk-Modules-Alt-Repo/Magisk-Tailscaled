@@ -84,7 +84,7 @@ if [ ! -f "$SERVICE_DIR/tailscaled_service.sh" ]; then
         mv -f "$MODPATH/service.sh" "$SERVICE_DIR/tailscaled_service.sh"
         break
       fi
-      getevent -lc 1 2>&1 | grep KEY_VOLUME > $TMPDIR/events
+      timeout 1s getevent -lc 1 2>&1 | grep KEY_VOLUME > $TMPDIR/events
       if $(cat $TMPDIR/events | grep -q KEY_VOLUMEUP) ; then
         ui_print "- [Yes] Move Module Scripts to General Scripts."
         mv -f "$MODPATH/service.sh" "$SERVICE_DIR/tailscaled_service.sh"
